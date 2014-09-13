@@ -51,13 +51,13 @@
                             (sage-shell:find-source-in-view-mode
                              (sage-shell-cpl:to-objname-to-send can))))))
 
-(defvar helm-c-source-sage-objects
+(defvar helm-source-sage-objects
   `(,@helm-sage-common-alist
     (name . "Sage Objects")
     (action . ,(append helm-sage-action-alist
                        helm-sage-additional-action-alist))))
 
-(defvar helm-c-source-sage-help
+(defvar helm-source-sage-help
   `(,@helm-sage-common-alist
     (name . "Sage Documents")
     (action . ,(append (reverse helm-sage-action-alist)
@@ -86,7 +86,7 @@
 (defun helm-sage-shell ()
   (interactive)
   (helm
-   :sources '(helm-c-source-sage-objects)
+   :sources '(helm-source-sage-objects)
    :input (sage-shell:word-at-point)
    :buffer "*helm Sage*"))
 
@@ -94,7 +94,7 @@
 (defun helm-sage-shell-describe-object-at-point ()
   (interactive)
   (helm
-   :sources '(helm-c-source-sage-help)
+   :sources '(helm-source-sage-help)
    :input (sage-shell:word-at-point)
    :buffer "*helm Sage*"))
 
@@ -108,7 +108,7 @@
 
 (defvar helm-sage-candidates-number-limit 100)
 
-(defvar helm-c-source-sage-command-history
+(defvar helm-source-sage-command-history
   `((name . "Sage Command History")
     (init . helm-sage-make-command-list)
     (action . (("Insert" . helm-sage-objcts-insert-action)))
@@ -124,7 +124,7 @@
 (defun helm-sage-command-history ()
   (interactive)
   (helm
-   :sources '(helm-c-source-sage-command-history)
+   :sources '(helm-source-sage-command-history)
    :buffer "*helm Sage*"))
 
 (provide 'helm-sage)
