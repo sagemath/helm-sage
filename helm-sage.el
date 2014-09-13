@@ -4,7 +4,6 @@
 ;; Author: Sho Takemori <stakemorii@gmail.com>
 ;; URL: https://github.com/stakemori/helm-sage
 ;; Keywords: Sage, math, helm
-;; Created: 2012
 ;; Version: 0.0.1
 ;; Package-Requires: ((helm "1.5.6") (sage-shell-mode "0.0.1"))
 
