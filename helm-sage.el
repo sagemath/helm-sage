@@ -6,7 +6,7 @@
 ;; Keywords: Sage, math, helm
 ;; Created: 2012
 ;; Version: 0.0.1
-;; Package-Requires: ((helm "20140901.59") (sage-shell-mode "0.0.1"))
+;; Package-Requires: ((helm "1.5.6") (sage-shell-mode "0.0.1"))
 
 ;;; License
 ;; This program is free software; you can redistribute it and/or modify
