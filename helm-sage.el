@@ -22,12 +22,8 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-;;; Installation
-;; 1. Install sage-shell-mode. See the comment of sage-shell-mode.el for the installation.
-;; 2. Ensure that helm.el and helm-match-plugin.el are in your load-path.
-;; 3. Put this file to your load-path and bytecompile it.
-;; 4. Bind 'helm-sage-shell to a key: e.g.
+;;; Setting
+;; Bind 'helm-sage-shell to a key: e.g.
 ;; (defun helm-sage-set-up ()
 ;;   (local-set-key (kbd "C-c C-i") 'helm-sage-shell))
 ;; (add-hook 'sage-shell-mode-hook 'helm-sage-set-up)
