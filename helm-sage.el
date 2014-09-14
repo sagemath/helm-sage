@@ -5,7 +5,7 @@
 ;; URL: https://github.com/stakemori/helm-sage
 ;; Keywords: Sage, math, helm
 ;; Version: 0.0.1
-;; Package-Requires: ((helm "1.5.6") (sage-shell-mode "0.0.1"))
+;; Package-Requires: ((cl-lib "0.5") (helm "1.5.6") (sage-shell-mode "0.0.1"))
 
 ;;; License
 ;; This program is free software; you can redistribute it and/or modify
@@ -28,8 +28,7 @@
 ;; (add-hook 'sage-shell-mode-hook 'helm-sage-set-up)
 
 ;;; Code:
-(eval-when-compile (require 'cl))
-(require 'helm)
+(require 'cl-lib)
 (require 'helm-match-plugin)
 (require 'sage-shell-mode)
 
@@ -112,7 +111,7 @@
 
 (defun helm-sage-make-command-list ()
   (setq helm-sage-commnd-list-cached
-        (loop for i from 0 to (ring-size comint-input-ring)
+        (cl-loop for i from 0 to (ring-size comint-input-ring)
          collect (ring-ref comint-input-ring i))))
 
 ;;;###autoload
