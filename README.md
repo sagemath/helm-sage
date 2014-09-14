@@ -1,5 +1,6 @@
 # Overview
-`helm-sage` provides a helm source for
+`helm-sage` provides a [helm](https://github.com/emacs-helm/helm)
+ source for
 [sage-shell-mode](https://github.com/stakemori/sage-shell-mode).
 
 ![helm-sage](images/helm-sage.gif)
