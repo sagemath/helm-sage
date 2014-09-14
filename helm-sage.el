@@ -22,9 +22,11 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Setting
-;; Bind 'helm-sage-shell to a key: e.g.
+;; Bind commands to some keys: e.g.
 ;; (defun helm-sage-set-up ()
-;;   (local-set-key (kbd "C-c C-i") 'helm-sage-shell))
+;;   (local-set-key (kbd "C-c C-i") 'helm-sage-shell)
+;;   (local-set-key (kbd "C-c C-d") 'helm-sage-shell-describe-object-at-point)
+;;   (local-set-key (kbd "M-r") 'helm-sage-command-history))
 ;; (add-hook 'sage-shell-mode-hook 'helm-sage-set-up)
 
 ;;; Code:
