@@ -28,6 +28,10 @@
 ;; (add-hook 'sage-shell-mode-hook 'helm-sage-set-up)
 
 ;;; Code:
+(defgroup helm-sage
+  nil "a helm source for `sage-shell-mode'."
+  :group 'helm)
+
 (require 'cl-lib)
 (require 'helm-match-plugin)
 (require 'sage-shell-mode)
@@ -59,7 +63,7 @@
 
 (defcustom helm-sage-candidate-regexp (rx alnum (zero-or-more (or alnum "_")))
   "Regexp used for collecting Sage attributes and functions."
-  :group 'sage-shell
+  :group 'helm-sage
   :type 'regexp)
 
 (defconst helm-sage-cands-buf-name " *helm Sage*")
