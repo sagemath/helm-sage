@@ -10,7 +10,22 @@ You will be able to install `helm-sage` from
 [MELPA](https://github.com/milkypostman/melpa.git) by package.el
 (`M-x package-install helm-sage`).
 
-# An example for Setting
+# Commands
+`helm-sage` provides 3 commands, `helm-sage-shell`,
+`helm-sage-shell-describe-object-at-point` and
+`helm-sage-command-history`.
+
+| Command                                  | Description                                                            |
+|------------------------------------------|------------------------------------------------------------------------|
+| helm-sage-shell                          | Show completions at point.                                             |
+| helm-sage-shell-describe-object-at-point | Almost same as `helm-sage-shell`. But the default action is different. |
+| helm-sage-command-history                | Show command history.                                                  |
+
+In `helm-sage-shell`, press `TAB` to show the list of actions.
+There are 3 actions, "Insert", "View Docstring" and "View Source File".
+
+
+# An example for setting
 Bind `helm-sage-shell`,
 `helm-sage-shell-describe-object-at-point` and
 `helm-sage-command-history` to some keys, e.g.:
