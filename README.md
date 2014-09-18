@@ -6,7 +6,7 @@
 ![helm-sage](images/helm-sage.gif)
 
 # Installation
-You will be able to install `helm-sage` from
+You can install `helm-sage` from
 [MELPA](https://github.com/milkypostman/melpa.git) by package.el
 (`M-x package-install helm-sage`).
 
