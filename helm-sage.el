@@ -21,8 +21,9 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;; Setting
-;; Bind commands to some keys: e.g.
+;;; Commentary:
+;; helm-sage provides 3 commands.
+;; Bind them to some keys: e.g.
 ;; (defun helm-sage-set-up ()
 ;;   (local-set-key (kbd "C-c C-i") 'helm-sage-shell)
 ;;   (local-set-key (kbd "C-c C-d") 'helm-sage-shell-describe-object-at-point)
