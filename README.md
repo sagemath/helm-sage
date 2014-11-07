@@ -1,3 +1,5 @@
+[![melpa badge][melpa-badge]][melpa-link] [![melpa stable badge][melpa-stable-badge]][melpa-stable-link]
+
 # Overview
 `helm-sage` provides a [helm](https://github.com/emacs-helm/helm)
  source for
@@ -36,3 +38,8 @@ Bind `helm-sage-shell`,
   (local-set-key (kbd "M-r") 'helm-sage-command-history))
 (add-hook 'sage-shell-mode-hook 'helm-sage-set-up)
 ```
+
+[melpa-link]: http://melpa.org/#/helm-sage
+[melpa-stable-link]: http://stable.melpa.org/#/helm-sage
+[melpa-badge]: http://melpa.org/packages/helm-sage-badge.svg
+[melpa-stable-badge]: http://stable.melpa.org/packages/helm-sage-badge.svg
