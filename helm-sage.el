@@ -128,5 +128,40 @@
    :sources '(helm-source-sage-command-history)
    :buffer "*helm Sage*"))
 
+(defcustom helm-sage-output-format "_%s"
+  "Format string used for helm-sage-output-history."
+  :group 'helm-sage
+  :type 'string)
+
+(defvar helm-sage-outputs-list-cached nil)
+
+(defun helm-sage-make-outputs-list ()
+  (setq helm-sage-outputs-list-cached
+        (with-current-buffer sage-shell:process-buffer
+          (let ((out (sage-shell:-inputs-outputs)))
+            (cl-loop for a in out
+                     collect (replace-regexp-in-string
+                              (rx (or (and bol "\n") (and "\n" eol)))
+                                "" a t))))))
+
+(defun helm-sage-output-history-action (c)
+  (when (string-match (rx bol "In " "[" (group (1+ num)) "]") c)
+    (with-current-buffer helm-current-buffer
+        (insert (format helm-sage-output-format (match-string 1 c))))))
+
+(defvar helm-sage-source-output-history
+  '((name . "Sage Output History")
+    (init . helm-sage-make-outputs-list)
+    (candidates . (lambda () helm-sage-outputs-list-cached))
+    (action . (("Insert the output" . helm-sage-output-history-action)))
+    (multiline)))
+
+(defun helm-sage-output-history ()
+  "List output history."
+  (interactive)
+  (helm :sources '(helm-sage-source-output-history)
+        :buffer "*helm Sage Outputs*"))
+
+
 (provide 'helm-sage)
 ;;; helm-sage.el ends here
