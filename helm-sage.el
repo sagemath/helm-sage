@@ -156,6 +156,7 @@
     (action . (("Insert the output" . helm-sage-output-history-action)))
     (multiline)))
 
+;;;###autoload
 (defun helm-sage-output-history ()
   "List output history."
   (interactive)
