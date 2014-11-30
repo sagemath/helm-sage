@@ -84,7 +84,10 @@
     (sage-shell:insert-action can)))
 
 ;;;###autoload
-(defun helm-sage-shell ()
+(defalias 'helm-sage-shell 'helm-sage-complete)
+
+;;;###autoload
+(defun helm-sage-complete ()
   (interactive)
   (helm
    :sources '(helm-source-sage-objects)
@@ -92,7 +95,11 @@
    :buffer "*helm Sage*"))
 
 ;;;###autoload
-(defun helm-sage-shell-describe-object-at-point ()
+(defalias 'helm-sage-shell-describe-object-at-point
+  'helm-sage-describe-object-at-point)
+
+;;;###autoload
+(defun helm-sage-describe-object-at-point ()
   (interactive)
   (helm
    :sources '(helm-source-sage-help)
