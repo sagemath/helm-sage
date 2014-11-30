@@ -22,13 +22,14 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; helm-sage provides 3 commands.
+;; helm-sage provides 4 commands.
 ;; Bind them to some keys: e.g.
-;; (defun helm-sage-set-up ()
-;;   (local-set-key (kbd "C-c C-i") 'helm-sage-shell)
-;;   (local-set-key (kbd "C-c C-d") 'helm-sage-shell-describe-object-at-point)
-;;   (local-set-key (kbd "M-r") 'helm-sage-command-history))
-;; (add-hook 'sage-shell-mode-hook 'helm-sage-set-up)
+;; (eval-after-load "sage-shell-mode"
+;;   '(sage-shell:define-keys sage-shell-mode-map
+;;      "C-c C-i"  'helm-sage-complete
+;;      "C-c C-h"  'helm-sage-describe-object-at-point
+;;      "M-r"      'helm-sage-command-history
+;;      "C-c o"    'helm-sage-output-history))
 
 ;;; Code:
 (defgroup helm-sage
@@ -84,7 +85,10 @@
     (sage-shell:insert-action can)))
 
 ;;;###autoload
-(defun helm-sage-shell ()
+(defalias 'helm-sage-shell 'helm-sage-complete)
+
+;;;###autoload
+(defun helm-sage-complete ()
   (interactive)
   (helm
    :sources '(helm-source-sage-objects)
@@ -92,7 +96,11 @@
    :buffer "*helm Sage*"))
 
 ;;;###autoload
-(defun helm-sage-shell-describe-object-at-point ()
+(defalias 'helm-sage-shell-describe-object-at-point
+  'helm-sage-describe-object-at-point)
+
+;;;###autoload
+(defun helm-sage-describe-object-at-point ()
   (interactive)
   (helm
    :sources '(helm-source-sage-help)

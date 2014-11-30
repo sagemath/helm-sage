@@ -13,30 +13,30 @@ You can install `helm-sage` from
 (`M-x package-install helm-sage`).
 
 # Commands
-`helm-sage` provides 3 commands, `helm-sage-shell`,
-`helm-sage-shell-describe-object-at-point` and
-`helm-sage-command-history`.
+`helm-sage` provides 4 commands, `helm-sage-complete`,
+`helm-sage-describe-object-at-point`,
+`helm-sage-command-history` and `helm-sage-output-history`.
 
 | Command                                  | Description                                                            |
 |------------------------------------------|------------------------------------------------------------------------|
-| helm-sage-shell                          | Show completions at point.                                             |
-| helm-sage-shell-describe-object-at-point | Almost same as `helm-sage-shell`. But the default action is different. |
+| helm-sage-complete                          | Show completions at point.                                             |
+| helm-sage-describe-object-at-point | Almost same as `helm-sage-shell`. But the default action is different. |
 | helm-sage-command-history                | Show command history.                                                  |
+| helm-sage-output-history | Show output history. |
 
-In `helm-sage-shell`, press `TAB` to show the list of actions.
+In `helm-sage-complete`, press `TAB` to show the list of actions.
 There are 3 actions, "Insert", "View Docstring" and "View Source File".
 
 
 # Sample configuration
-Bind `helm-sage-shell`,
-`helm-sage-shell-describe-object-at-point` and
-`helm-sage-command-history` to some keys, e.g.:
+Bind these commands to some keys, e.g.:
 ```lisp
-(defun helm-sage-set-up ()
-  (local-set-key (kbd "C-c C-i") 'helm-sage-shell)
-  (local-set-key (kbd "C-c C-d") 'helm-sage-shell-describe-object-at-point)
-  (local-set-key (kbd "M-r") 'helm-sage-command-history))
-(add-hook 'sage-shell-mode-hook 'helm-sage-set-up)
+(eval-after-load "sage-shell-mode"
+  '(sage-shell:define-keys sage-shell-mode-map
+     "C-c C-i"  'helm-sage-complete
+     "C-c C-h"  'helm-sage-describe-object-at-point
+     "M-r"      'helm-sage-command-history
+     "C-c o"    'helm-sage-output-history))
 ```
 
 [melpa-link]: http://melpa.org/#/helm-sage
