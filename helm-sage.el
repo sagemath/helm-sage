@@ -137,26 +137,33 @@
   :type 'string)
 
 (defvar helm-sage-outputs-list-cached nil)
+(make-variable-buffer-local 'helm-sage-outputs-list-cached)
+
+(defun helm-sage--outputs-clear-cache ()
+  (setq helm-sage-outputs-list-cached nil))
+(add-hook 'sage-shell:-send-input-hook 'helm-sage--outputs-clear-cache)
 
 (defun helm-sage-make-outputs-list ()
-  (setq helm-sage-outputs-list-cached
-        (with-current-buffer sage-shell:process-buffer
-          (let ((out (sage-shell:-inputs-outputs)))
-            (cl-loop for a in out
-                     collect (replace-regexp-in-string
-                              (rx (or (and bol "\n") (and "\n" eol)))
-                                "" a t))))))
+  (with-current-buffer sage-shell:process-buffer
+    (unless helm-sage-outputs-list-cached
+      (setq helm-sage-outputs-list-cached
+            (let ((out (sage-shell:-inputs-outputs)))
+              (cl-loop for a in out
+                       collect (replace-regexp-in-string
+                                (rx (or (and bol "\n") (and "\n" eol)))
+                                "" a t)))))))
 
 (defun helm-sage-output-history-action (c)
   (when (string-match (rx bol "In " "[" (group (1+ num)) "]") c)
     (with-current-buffer helm-current-buffer
-        (insert (format helm-sage-output-format (match-string 1 c))))))
+      (insert (format helm-sage-output-format (match-string 1 c))))))
 
 (defvar helm-sage-source-output-history
   (helm-build-sync-source
    "Sage Output History"
    :init 'helm-sage-make-outputs-list
-   :candidates (lambda () helm-sage-outputs-list-cached)
+   :candidates (lambda () (with-current-buffer helm-current-buffer
+                        helm-sage-outputs-list-cached))
    :action '(("Insert the output" . helm-sage-output-history-action))
    :multiline t))
 
