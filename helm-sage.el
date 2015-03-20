@@ -44,31 +44,29 @@
   '(("Insert" . helm-sage-objcts-insert-action)
     ("View Docstring" . helm-sage-show-doc)))
 
-(defvar helm-sage-common-alist
-  '((init . helm-sage-init)
-    (candidates-in-buffer)))
-
 (defvar helm-sage-additional-action-alist
   '(("View Source File" . (lambda (can)
                             (sage-shell:find-source-in-view-mode
                              (sage-shell-cpl:to-objname-to-send can))))))
 
-(defvar helm-source-sage-objects
-  `(,@helm-sage-common-alist
-    (name . "Sage Objects")
-    (action . ,(append helm-sage-action-alist
-                       helm-sage-additional-action-alist))))
-
-(defvar helm-source-sage-help
-  `(,@helm-sage-common-alist
-    (name . "Sage Documents")
-    (action . ,(append (reverse helm-sage-action-alist)
-                       helm-sage-additional-action-alist))))
-
 (defcustom helm-sage-candidate-regexp (rx alnum (zero-or-more (or alnum "_")))
   "Regexp used for collecting Sage attributes and functions."
   :group 'helm-sage
   :type 'regexp)
+
+(defvar helm-source-sage-objects
+  (helm-build-in-buffer-source "Sage objects"
+    :data (lambda ()
+            (sage-shell-cpl:candidates-sync helm-sage-candidate-regexp))
+    :action (append helm-sage-action-alist
+                    helm-sage-additional-action-alist)))
+
+(defvar helm-source-sage-help
+  (helm-build-in-buffer-source "Sage Documents"
+    :data (lambda ()
+            (sage-shell-cpl:candidates-sync helm-sage-candidate-regexp))
+    :action (append (reverse helm-sage-action-alist)
+                    helm-sage-additional-action-alist)))
 
 (defconst helm-sage-cands-buf-name " *helm Sage*")
 
@@ -115,14 +113,11 @@
 
 (defvar helm-sage-commnd-list-cached nil)
 
-(defvar helm-sage-candidates-number-limit 100)
-
 (defvar helm-source-sage-command-history
-  `((name . "Sage Command History")
-    (init . helm-sage-make-command-list)
-    (action . (("Insert" . helm-sage-objcts-insert-action)))
-    (candidates . (lambda () helm-sage-commnd-list-cached))
-    (candidate-number-limit . ,helm-sage-candidates-number-limit)))
+  (helm-build-sync-source "Sage Command History"
+    :init 'helm-sage-make-command-list
+    :action '(("Insert" . helm-sage-objcts-insert-action))
+    :candidates (lambda () helm-sage-commnd-list-cached)))
 
 (defun helm-sage-make-command-list ()
   (setq helm-sage-commnd-list-cached
@@ -158,11 +153,12 @@
         (insert (format helm-sage-output-format (match-string 1 c))))))
 
 (defvar helm-sage-source-output-history
-  '((name . "Sage Output History")
-    (init . helm-sage-make-outputs-list)
-    (candidates . (lambda () helm-sage-outputs-list-cached))
-    (action . (("Insert the output" . helm-sage-output-history-action)))
-    (multiline)))
+  (helm-build-sync-source
+   "Sage Output History"
+   :init 'helm-sage-make-outputs-list
+   :candidates (lambda () helm-sage-outputs-list-cached)
+   :action '(("Insert the output" . helm-sage-output-history-action))
+   :multiline t))
 
 ;;;###autoload
 (defun helm-sage-output-history ()
