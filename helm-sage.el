@@ -68,16 +68,6 @@
     :action (append (reverse helm-sage-action-alist)
                     helm-sage-additional-action-alist)))
 
-(defconst helm-sage-cands-buf-name " *helm Sage*")
-
-(defun helm-sage-init ()
-  (let ((cands (sage-shell-cpl:candidates-sync helm-sage-candidate-regexp)))
-    (with-current-buffer (get-buffer-create helm-sage-cands-buf-name)
-      (erase-buffer)
-      (dolist (can cands)
-        (insert (format "%s\n" can)))
-      (helm-candidate-buffer (current-buffer)))))
-
 (defun helm-sage-objcts-insert-action (can)
   (with-current-buffer helm-current-buffer
     (sage-shell:insert-action can)))
@@ -151,7 +141,6 @@
 (defvar helm-sage-source-output-history
   (helm-build-sync-source
    "Sage Output History"
-   :init 'helm-sage-make-outputs-list
    :candidates (lambda () (with-current-buffer helm-current-buffer
                         (helm-sage-make-outputs-list)))
    :action '(("Insert the output" . helm-sage-output-history-action))
