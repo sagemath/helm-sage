@@ -1,0 +1,6 @@
+;; -*- mode: emacs-lisp -*-
+
+(source melpa)
+(package-file "helm-sage.el")
+(depends-on "sage-shell-mode")
+(depends-on "helm")
