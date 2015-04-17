@@ -1,4 +1,6 @@
-[![melpa badge][melpa-badge]][melpa-link] [![melpa stable badge][melpa-stable-badge]][melpa-stable-link]
+[![melpa badge][melpa-badge]][melpa-link]
+[![melpa stable badge][melpa-stable-badge]][melpa-stable-link]
+[![Build Status](https://travis-ci.org/stakemori/helm-sage.svg)](https://travis-ci.org/stakemori/helm-sage)
 
 # Overview
 `helm-sage` provides a [helm](https://github.com/emacs-helm/helm)
