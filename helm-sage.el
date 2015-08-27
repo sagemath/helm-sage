@@ -37,7 +37,7 @@
   :group 'helm)
 
 (require 'cl-lib)
-(require 'helm-match-plugin)
+(require 'helm)
 (require 'sage-shell-mode)
 
 (defvar helm-sage-action-alist
