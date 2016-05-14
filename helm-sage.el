@@ -1,11 +1,11 @@
 ;;; helm-sage.el --- A helm extension for sage-shell-mode.
 
-;; Copyright (C) 2012-2014 Sho Takemori.
+;; Copyright (C) 2012-2016 Sho Takemori.
 ;; Author: Sho Takemori <stakemorii@gmail.com>
 ;; URL: https://github.com/stakemori/helm-sage
 ;; Keywords: Sage, math, helm
 ;; Version: 0.0.4
-;; Package-Requires: ((cl-lib "0.5") (helm "1.5.6") (sage-shell-mode "0.0.8"))
+;; Package-Requires: ((cl-lib "0.5") (helm "1.5.6") (sage-shell-mode "0.1.0"))
 
 ;;; License
 ;; This program is free software; you can redistribute it and/or modify
